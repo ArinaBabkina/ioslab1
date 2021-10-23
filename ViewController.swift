@@ -14,7 +14,6 @@ class ViewController: UIViewController {
      let sectionSpacing = (1 / 8) * UIScreen.main.bounds.width
      let cellSpacing = (1 / 8) * UIScreen.main.bounds.width
      
-     let colors: [UIColor] = [.red, .green, .blue]
      let images: [UIImage] = [
         UIImage(named:"ironman")!,
         UIImage(named: "cap")!,
@@ -22,11 +21,7 @@ class ViewController: UIViewController {
      ]
     
      let labels: [String] = ["Iron Man", "Captain America", "Spider Man"]
-    
-    
      let cellId = "cell id"
-     
-     // MARK: - UI Components
      
      lazy var collectionView: UICollectionView = {
          let layout = PagingCollectionViewLayout()
