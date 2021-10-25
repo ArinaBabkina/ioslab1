@@ -21,11 +21,9 @@ class ViewController: UIViewController {
      ]
     
      let labels: [String] = ["Iron Man", "Captain America", "Spider Man"]
-    
-    
      let cellId = "cell id"
      
-     
+
      lazy var collectionView: UICollectionView = {
         
          let layout = PagingCollectionViewLayout()
