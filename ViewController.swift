@@ -14,7 +14,6 @@ class ViewController: UIViewController {
      let sectionSpacing = (1 / 8) * UIScreen.main.bounds.width
      let cellSpacing = (1 / 8) * UIScreen.main.bounds.width
      
-     let colors: [UIColor] = [.red, .green, .blue]
      let images: [UIImage] = [
         UIImage(named:"ironman")!,
         UIImage(named: "cap")!,
@@ -26,16 +25,15 @@ class ViewController: UIViewController {
     
      let cellId = "cell id"
      
-     // MARK: - UI Components
      
      lazy var collectionView: UICollectionView = {
+        
          let layout = PagingCollectionViewLayout()
          layout.scrollDirection = .horizontal
          layout.sectionInset = UIEdgeInsets(top: 0, left: sectionSpacing, bottom: 0, right: sectionSpacing)
          layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
          layout.minimumLineSpacing = cellSpacing
         
-         
          let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
          collectionView.translatesAutoresizingMaskIntoConstraints = false
          collectionView.showsHorizontalScrollIndicator = false
@@ -45,14 +43,22 @@ class ViewController: UIViewController {
          return collectionView
      }()
     
+    
+    
+    class collectionViewCell: UICollectionViewCell {
+        let imageView = UIImageView()
+        let name = UILabel (frame: CGRect(x:0, y: (4 / 8) * UIScreen.main.bounds.height - 60, width: (3 / 4) * UIScreen.main.bounds.width, height: 40 ))
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
                registerCollectionViewCells()
                applyConstraints()
     }
 
+    
            private func registerCollectionViewCells() {
-               collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+               collectionView.register(collectionViewCell.self, forCellWithReuseIdentifier: cellId)
            }
            
            private func applyConstraints() {
@@ -71,22 +77,20 @@ class ViewController: UIViewController {
            }
            
            func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-               let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-               
-               let imageView = UIImageView()
+               let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! collectionViewCell
+
                let image = images[indexPath.item]
-               imageView.image = image
-               imageView.contentMode = .scaleAspectFill
-               cell.backgroundView = imageView
-               
+               cell.imageView.image = image
+               cell.imageView.contentMode = .scaleAspectFill
+                        
                let labl = labels[indexPath.item]
-               let name = UILabel(frame: CGRect (x: 0, y: cell.bounds.maxY - 50, width: cell.bounds.size.width, height: 40))
-               name.text = labl
-               name.textColor = .white
-               name.font = name.font.withSize(30)
-               name.textAlignment = .center
-               cell.contentView.addSubview(name)
+               cell.name.text = labl
+               cell.name.textColor = .white
+               cell.name.font = cell.name.font.withSize(30)
+               cell.name.textAlignment = .center
                
+               cell.backgroundView = cell.imageView
+               cell.addSubview(cell.name)
                return cell
            }
            
