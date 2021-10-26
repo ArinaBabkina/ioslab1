@@ -23,7 +23,6 @@ class ViewController: UIViewController {
      let labels: [String] = ["Iron Man", "Captain America", "Spider Man"]
      let cellId = "cell id"
      
-
      lazy var collectionView: UICollectionView = {
         
          let layout = PagingCollectionViewLayout()
@@ -41,8 +40,6 @@ class ViewController: UIViewController {
          return collectionView
      }()
     
-    
-    
     class collectionViewCell: UICollectionViewCell {
         let imageView = UIImageView()
         let name = UILabel (frame: CGRect(x:0, y: (4 / 8) * UIScreen.main.bounds.height - 60, width: (3 / 4) * UIScreen.main.bounds.width, height: 40 ))
@@ -53,7 +50,6 @@ class ViewController: UIViewController {
                registerCollectionViewCells()
                applyConstraints()
     }
-
     
            private func registerCollectionViewCells() {
                collectionView.register(collectionViewCell.self, forCellWithReuseIdentifier: cellId)
